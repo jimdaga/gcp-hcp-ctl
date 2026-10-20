@@ -334,7 +334,7 @@ make clean    # Remove build artifacts
 
 ### Prerequisites
 
-- Go 1.25+
+- Go 1.26.10 (selected automatically by Makefile targets)
 - Google Cloud API commands (`iam`, `network`, `ops`) use Application Default
   Credentials (ADC). For local user credentials, run
   `gcloud auth application-default login`; supported service-account or
