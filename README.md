@@ -336,8 +336,8 @@ make clean    # Remove build artifacts
 
 - Go 1.26.10 installed on `PATH`. Makefile targets check this version and set
   `GOTOOLCHAIN=local`, preserving the installed compiler and disabling automatic
-  toolchain downloads. For Red Hat/UBI builds, use the `1.26.10-1.el9_8` Go RPMs.
-  CI and E2E builder images must install that toolchain before invoking Make.
+  toolchain downloads. CI and E2E builds must use a patched Red Hat UBI 9 Go
+  builder that provides Go 1.26.10 before invoking Make.
   Direct Go commands should also use `GOTOOLCHAIN=local`.
 - Google Cloud API commands (`iam`, `network`, `ops`) use Application Default
   Credentials (ADC). For local user credentials, run
