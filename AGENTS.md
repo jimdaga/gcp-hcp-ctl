@@ -54,7 +54,7 @@ Cluster and nodepool lifecycle requests go through the Platform API; `ops` debug
 
 ## Code Conventions
 
-- Go 1.26.10 required; Makefile targets select this toolchain explicitly
+- Go 1.26.10 must be installed on `PATH`; Makefile targets check this version and use `GOTOOLCHAIN=local` to preserve the installed toolchain. Red Hat/UBI builds use Go RPMs `1.26.10-1.el9_8`.
 - Google Cloud API clients use ADC; local user ADC can be set up with `gcloud auth application-default login`
 - Platform API identity tokens use service-account ADC or external-account ADC with service-account impersonation; user ADC or absent ADC selects the active gcloud session, which needs `gcloud auth login` (see `pkg/auth/auth.go`)
 - Configuration priority: CLI flags > environment variables > config file (`~/.gcphcpctl/config.yaml`)

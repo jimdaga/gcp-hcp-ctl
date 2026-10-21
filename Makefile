@@ -1,5 +1,5 @@
-# Pin the compiler and standard library for CVE-2026-111943.
-export GOTOOLCHAIN = go1.26.10
+# Use the installed compiler; never download a replacement toolchain.
+export GOTOOLCHAIN = local
 
 .PHONY: build test lint clean help release
 
@@ -34,3 +34,13 @@ release: ## Tag and push a release (usage: make release v=0.2.0)
 	git tag -a "v$(v)" -m "Release v$(v)"
 	git push origin "v$(v)"
 	@echo "Pushed v$(v)"
+
+# Keep the Go 1.26.10 baseline for CVE-2026-111943 without replacing vendor builds.
+.PHONY: check-toolchain
+check-toolchain:
+	@test "$$(go env GOVERSION | cut -d' ' -f1)" = go1.26.10 || { \
+		echo "Install Go 1.26.10 before running this target; automatic toolchain downloads are disabled." >&2; \
+		exit 1; \
+	}
+
+build test lint: check-toolchain
