@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/go-toolset:1.26@sha256:0e3894cea4fc077084245e8aa2befc8a7d91a4f60fbf850f0b5b555cbe62ee26 AS builder
+FROM registry.access.redhat.com/ubi9/go-toolset:1.26 AS builder
 
 ARG APP_VERSION=dev
 ARG APP_COMMIT=unknown
@@ -27,7 +27,7 @@ RUN set -eux; \
     done; \
     ( cd releases && sha256sum *.tar.gz > "gcphcpctl_${APP_VERSION}_SHA256SUMS" )
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal:latest@sha256:ac50cda52b2de3001fdf4b54ffe553c91977caff8e3c0e9a3d340cdb730f2c86
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
 
 LABEL org.opencontainers.image.title="gcp-hcp-ctl" \
       org.opencontainers.image.description="CLI for managing GCP Hosted Control Plane (HCP) clusters" \
